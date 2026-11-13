@@ -1,0 +1,133 @@
+@use './assets/scss/tokens';
+
+/* ===== Reset mínimo ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--app-color-fondo);
+    color: var(--app-color-texto);
+    font-family: var(--app-fuente);
+    font-size: var(--app-texto-md);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+figure {
+    margin: 0;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* El foco visible nunca se anula: es la única guía de quien navega con teclado. */
+:focus-visible {
+    outline: 2px solid var(--app-color-foco);
+    outline-offset: 2px;
+}
+
+/* ===== Utilidades ===== */
+
+/* Contenido solo para lectores de pantalla. */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.app-contenedor {
+    width: 100%;
+    max-width: var(--app-ancho-contenido);
+    margin: 0 auto;
+    padding: 0 var(--app-esp-md);
+}
+
+/* ===== Botones ===== */
+.app-boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--app-esp-sm);
+    min-height: var(--app-alto-control);
+    padding: 0 var(--app-esp-lg);
+    border: 0;
+    border-radius: var(--app-radio-sm);
+    font-size: var(--app-texto-sm);
+    font-weight: 600;
+    /* El botón también se usa sobre <a>, que vendría subrayado. */
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+
+    &:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+    }
+}
+
+.app-boton--primario {
+    background-color: var(--app-color-primario);
+    color: var(--app-color-primario-texto);
+
+    &:hover:not(:disabled) {
+        background-color: var(--app-color-primario-hover);
+    }
+}
+
+.app-boton--secundario {
+    background-color: var(--app-color-secundario);
+    color: var(--app-color-secundario-texto);
+
+    &:hover:not(:disabled) {
+        background-color: var(--app-color-secundario-hover);
+    }
+}
+
+/* ===== Tarjeta ===== */
+.app-tarjeta {
+    background-color: var(--app-color-superficie);
+    border-radius: var(--app-radio-md);
+    box-shadow: var(--app-sombra-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

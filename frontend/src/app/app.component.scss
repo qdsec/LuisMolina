@@ -1,0 +1,30 @@
+.cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4rem;
+    background-color: var(--app-color-superficie);
+    border-bottom: 1px solid var(--app-color-borde);
+}
+
+.cabecera__marca {
+    display: flex;
+    align-items: center;
+    gap: var(--app-esp-sm);
+    color: var(--app-color-marca);
+}
+
+.cabecera__icono {
+    font-size: var(--app-texto-lg);
+}
+
+.cabecera__nombre {
+    font-size: var(--app-texto-lg);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.contenido {
+    padding-top: var(--app-esp-xl);
+    padding-bottom: var(--app-esp-xxl);
+}

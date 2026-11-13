@@ -1,0 +1,117 @@
+<section class="app-tarjeta listado">
+    <h1 class="sr-only">Productos financieros</h1>
+
+    <div class="listado__barra">
+        <label class="sr-only" for="buscador">Buscar productos</label>
+        <input
+            id="buscador"
+            type="search"
+            class="listado__buscador"
+            placeholder="Search..."
+            [formControl]="busquedaControl"
+            (input)="alBuscar()"
+        />
+
+        <a class="app-boton app-boton--primario" routerLink="/productos/nuevo">Agregar</a>
+    </div>
+
+    @if (cargando()) {
+        <app-skeleton-tabla [cantidadFilas]="tamanoPagina()" />
+    } @else if (errorCarga()) {
+        <div class="listado__aviso listado__aviso--error" role="alert">
+            <p>{{ errorCarga() }}</p>
+            <button type="button" class="app-boton app-boton--secundario" (click)="cargar()">
+                Reintentar
+            </button>
+        </div>
+    } @else if (sinResultados()) {
+        <div class="listado__aviso">
+            @if (hayProductos()) {
+                <p>No se encontraron productos para esa búsqueda.</p>
+            } @else {
+                <p>Aún no hay productos registrados. Agrega el primero.</p>
+            }
+        </div>
+    } @else {
+        <div class="listado__tabla-contenedor" tabindex="0" role="group" aria-label="Tabla de productos">
+            <table class="listado__tabla">
+                <caption class="sr-only">
+                    Productos financieros, {{ total() }}
+                    {{ total() === 1 ? 'resultado' : 'resultados' }}
+                </caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Logo</th>
+                        <th scope="col">Nombre del producto</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Fecha de liberación</th>
+                        <th scope="col">Fecha de reestructuración</th>
+                        <th scope="col"><span class="sr-only">Acciones</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (producto of visibles(); track producto.id) {
+                        <tr>
+                            <td>
+                                <app-logo-producto
+                                    [logo]="producto.logo"
+                                    [nombre]="producto.nombre"
+                                />
+                            </td>
+                            <td class="listado__celda-nombre">{{ producto.nombre }}</td>
+                            <td>{{ producto.descripcion }}</td>
+                            <td>{{ aFecha(producto.fechaLiberacion) | date: 'dd/MM/yyyy' }}</td>
+                            <td>{{ aFecha(producto.fechaRevision) | date: 'dd/MM/yyyy' }}</td>
+                            <td class="listado__celda-acciones">
+                                <app-menu-contextual
+                                    [opciones]="opcionesMenu"
+                                    [etiqueta]="'Acciones para ' + producto.nombre"
+                                    (seleccion)="alElegirAccion($event, producto)"
+                                />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="listado__pie">
+            <p class="listado__resultados" role="status">
+                {{ total() }} {{ total() === 1 ? 'Resultado' : 'Resultados' }}
+            </p>
+
+            <div class="listado__controles">
+                <app-paginador
+                    [pagina]="pagina()"
+                    [totalPaginas]="totalPaginas()"
+                    (cambio)="irAPagina($event)"
+                />
+
+                <label class="sr-only" for="tamano-pagina">Registros por página</label>
+                <select
+                    id="tamano-pagina"
+                    class="listado__select"
+                    (change)="cambiarTamanoPagina($any($event.target).value)"
+                >
+                    <!-- [selected] por opción: al recrearse el bloque, un [value]
+                         en el <select> se aplica antes de que existan las opciones
+                         y la lista mostraría un tamaño distinto al real. -->
+                    @for (tamano of tamanosDisponibles; track tamano) {
+                        <option [value]="tamano" [selected]="tamano === tamanoPagina()">
+                            {{ tamano }}
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+    }
+</section>
+
+@if (productoAEliminar(); as producto) {
+    <app-modal-confirmacion
+        [mensaje]="mensajeEliminacion(producto)"
+        etiquetaConfirmar="Eliminar"
+        (confirmar)="confirmarEliminacion()"
+        (cancelado)="cancelarEliminacion()"
+    />
+}

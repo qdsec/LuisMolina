@@ -1,0 +1,83 @@
+<section class="app-tarjeta formulario">
+    <h1 class="formulario__titulo">{{ titulo() }}</h1>
+
+    @if (errorCarga()) {
+        <div class="formulario__aviso" role="alert">
+            <p>{{ errorCarga() }}</p>
+            <a class="app-boton app-boton--secundario" routerLink="/productos">Volver al listado</a>
+        </div>
+    } @else {
+        <form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+            <fieldset class="formulario__campos" [disabled]="cargando()">
+                <legend class="sr-only">Datos del producto</legend>
+
+                <app-campo
+                    formControlName="id"
+                    etiqueta="ID"
+                    [maxlength]="10"
+                    [envioIntentado]="envioIntentado()"
+                />
+
+                <app-campo
+                    formControlName="nombre"
+                    etiqueta="Nombre"
+                    [maxlength]="100"
+                    [envioIntentado]="envioIntentado()"
+                />
+
+                <app-campo
+                    formControlName="descripcion"
+                    etiqueta="Descripción"
+                    [maxlength]="200"
+                    [envioIntentado]="envioIntentado()"
+                />
+
+                <app-campo
+                    formControlName="logo"
+                    etiqueta="Logo"
+                    [envioIntentado]="envioIntentado()"
+                />
+
+                <app-campo
+                    formControlName="fechaLiberacion"
+                    etiqueta="Fecha Liberación"
+                    tipo="date"
+                    [envioIntentado]="envioIntentado()"
+                />
+
+                <app-campo
+                    formControlName="fechaRevision"
+                    etiqueta="Fecha Revisión"
+                    tipo="date"
+                    ayuda="Se calcula automáticamente: un año después de la liberación."
+                />
+            </fieldset>
+
+            <div class="formulario__acciones">
+                <a class="app-boton app-boton--secundario" routerLink="/productos">Cancelar</a>
+
+                <button
+                    type="button"
+                    class="app-boton app-boton--secundario"
+                    (click)="reiniciar()"
+                >
+                    Reiniciar
+                </button>
+
+                <button
+                    type="submit"
+                    class="app-boton app-boton--primario"
+                    [disabled]="guardando() || form.pending"
+                >
+                    @if (form.pending) {
+                        Verificando…
+                    } @else if (guardando()) {
+                        Guardando…
+                    } @else {
+                        Enviar
+                    }
+                </button>
+            </div>
+        </form>
+    }
+</section>

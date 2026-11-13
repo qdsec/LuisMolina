@@ -1,0 +1,74 @@
+/**
+ * Única fuente de verdad del sistema visual.
+ *
+ * Todo color, espaciado, radio y tamaño sale de estas variables: en los componentes
+ * no se escriben valores hexadecimales sueltos. La paleta sigue los diseños D1–D4:
+ * cabecera azul marino, acción principal amarilla y superficie gris muy claro.
+ */
+:root {
+    /* Marca */
+    --app-color-marca: #1d3a6e;
+    --app-color-marca-texto: #ffffff;
+
+    /* Acción principal */
+    --app-color-primario: #f5e05e;
+    --app-color-primario-hover: #ecd441;
+    --app-color-primario-texto: #3d3718;
+
+    /* Acción secundaria */
+    --app-color-secundario: #e9e9ed;
+    --app-color-secundario-hover: #dcdce2;
+    --app-color-secundario-texto: #3f3f46;
+
+    /* Superficies */
+    --app-color-fondo: #f4f5f7;
+    --app-color-superficie: #ffffff;
+    --app-color-borde: #e2e4e9;
+    --app-color-borde-fuerte: #c9ccd4;
+
+    /* Texto */
+    --app-color-texto: #1f2430;
+    --app-color-texto-suave: #5d6472;
+    --app-color-texto-tenue: #8b91a0;
+
+    /* Estados */
+    --app-color-error: #c62828;
+    --app-color-error-fondo: #fdecec;
+    --app-color-exito: #1b7f4b;
+    --app-color-exito-fondo: #e8f5ee;
+    --app-color-info: #1d3a6e;
+    --app-color-info-fondo: #e9eef7;
+    --app-color-foco: #1d6ad4;
+    --app-color-velo-modal: rgba(31, 36, 48, 0.55);
+
+    /* Espaciado */
+    --app-esp-xs: 0.25rem;
+    --app-esp-sm: 0.5rem;
+    --app-esp-md: 1rem;
+    --app-esp-lg: 1.5rem;
+    --app-esp-xl: 2rem;
+    --app-esp-xxl: 3rem;
+
+    /* Radios */
+    --app-radio-sm: 4px;
+    --app-radio-md: 8px;
+    --app-radio-lg: 14px;
+    --app-radio-circulo: 50%;
+
+    /* Tipografía */
+    --app-fuente: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --app-texto-xs: 0.75rem;
+    --app-texto-sm: 0.875rem;
+    --app-texto-md: 1rem;
+    --app-texto-lg: 1.25rem;
+    --app-texto-xl: 1.5rem;
+
+    /* Elevación */
+    --app-sombra-sm: 0 1px 2px rgba(31, 36, 48, 0.08);
+    --app-sombra-md: 0 4px 16px rgba(31, 36, 48, 0.1);
+    --app-sombra-lg: 0 12px 32px rgba(31, 36, 48, 0.18);
+
+    /* Medidas */
+    --app-ancho-contenido: 70rem;
+    --app-alto-control: 2.75rem;
+}

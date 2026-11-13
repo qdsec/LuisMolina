@@ -1,0 +1,21 @@
+/node_modules
+pnpm-lock.yaml
+
+# build
+/dist
+
+# pruebas
+/coverage
+
+# frontend
+/frontend/node_modules
+/frontend/dist
+/frontend/coverage
+/frontend/.angular
+
+# entorno
+.env
+.env.local
+
+# documento generado (no versionado: su Parte II es el solucionario)
+*.docx

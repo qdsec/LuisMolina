@@ -1,0 +1,144 @@
+.listado {
+    padding: var(--app-esp-lg);
+}
+
+.listado__barra {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--app-esp-md);
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--app-esp-lg);
+}
+
+.listado__buscador {
+    flex: 1 1 14rem;
+    max-width: 18rem;
+    min-height: var(--app-alto-control);
+    padding: 0 var(--app-esp-md);
+    border: 1px solid var(--app-color-borde-fuerte);
+    border-radius: var(--app-radio-sm);
+}
+
+.listado__tabla-contenedor {
+    overflow-x: auto;
+    /* Contiene a los elementos .sr-only de la tabla: siendo absolutos, su
+       bloque contenedor sería el viewport y desbordarían la página a lo ancho. */
+    position: relative;
+}
+
+.listado__tabla {
+    width: 100%;
+    min-width: 46rem;
+    border-collapse: collapse;
+    font-size: var(--app-texto-sm);
+
+    th,
+    td {
+        padding: var(--app-esp-md) var(--app-esp-sm);
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    thead th {
+        border-bottom: 2px solid var(--app-color-borde);
+        color: var(--app-color-texto);
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    tbody tr {
+        border-bottom: 1px solid var(--app-color-borde);
+    }
+
+    tbody td {
+        color: var(--app-color-texto-suave);
+    }
+}
+
+.listado__celda-nombre {
+    color: var(--app-color-texto) !important;
+    font-weight: 600;
+}
+
+.listado__celda-acciones {
+    text-align: right;
+    width: 3rem;
+}
+
+.listado__pie {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--app-esp-md);
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--app-esp-lg);
+}
+
+.listado__resultados {
+    color: var(--app-color-texto-suave);
+    font-size: var(--app-texto-sm);
+    font-weight: 600;
+}
+
+.listado__controles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--app-esp-md);
+    align-items: center;
+}
+
+.listado__select {
+    min-height: 2.25rem;
+    padding: 0 var(--app-esp-sm);
+    border: 1px solid var(--app-color-borde-fuerte);
+    border-radius: var(--app-radio-sm);
+    background-color: var(--app-color-superficie);
+}
+
+.listado__aviso {
+    display: flex;
+    flex-direction: column;
+    gap: var(--app-esp-md);
+    align-items: center;
+    padding: var(--app-esp-xxl) var(--app-esp-md);
+    color: var(--app-color-texto-suave);
+    text-align: center;
+}
+
+.listado__aviso--error {
+    color: var(--app-color-error);
+}
+
+@media (max-width: 40rem) {
+    .listado {
+        padding: var(--app-esp-md);
+    }
+
+    .listado__barra {
+        flex-direction: column;
+        align-items: stretch;
+
+        .listado__buscador {
+            /* En columna, el flex-basis de 14rem pasaría a ser la ALTURA. */
+            flex: none;
+            max-width: none;
+        }
+    }
+
+    /* La columna de acciones queda siempre visible pese al scroll horizontal. */
+    .listado__celda-acciones {
+        position: sticky;
+        right: 0;
+        background-color: var(--app-color-superficie);
+    }
+
+    .listado__pie {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .listado__controles {
+        justify-content: space-between;
+    }
+}
